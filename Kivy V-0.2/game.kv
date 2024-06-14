@@ -1,0 +1,114 @@
+#:kivy 1.0.9
+
+    #:set blanco [1]*4
+    #:set negro [0]*3
+
+<Enemy>:
+    size: 50, -100 
+    canvas:     
+        Color:
+            rgba: self.color  
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/car1.png'
+
+<Player>:
+    size: 50, 100
+    canvas:
+        Color:
+            rgba: self.color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: self.imagen
+
+<Game>:
+    car: enemigo1
+    player: player_left
+
+    canvas:
+        Color:
+            rgba: self.color1
+        Rectangle:
+            pos: 0, 0
+            size: self.width/3, self.height
+        Color:
+            rgba: self.color2
+        Rectangle:
+            pos: root.width/3, 0
+            size: self.width/3, self.height
+        Color:
+            rgba: self.color3
+        Rectangle:
+            pos: root.width/3*2, 0
+            size: self.width/3, self.height
+
+    Enemy:
+        id: enemigo1
+        center: self.parent.center
+        pos:0,0
+
+    Label:
+        color : negro
+        font_size: 70  
+        center_x: root.width / 2
+        top: root.top - 50
+        text: str(root.player.score)
+        font_name: 'fonts/Race Sport.ttf'
+
+    Player:
+        id: player_left
+        center_x: root.center_x
+        y: root.y+self.height/2
+
+    Button:
+        id: start_button
+        text: "JUGAR"
+        size: 150, 50
+        font_size: 20
+        background_color: negro
+        color: blanco
+        on_press: 
+            root.iniciar_juego()
+        font_name: 'fonts/Race Sport.ttf'
+    
+    Button:
+        id: color_button
+        text: "Cambiar Auto"
+        size: 150, 50
+        background_color: negro
+        color: blanco
+        font_size:12
+        on_press:
+            root.cambiarAuto()
+        font_name: 'fonts/Race Sport.ttf'
+    
+    Button:
+        id: pistaColor_button
+        text: "Cambiar Pista (1/6)"
+        size: 150, 50
+        font_size: 10
+        background_color: negro
+        color: blanco
+        on_press: 
+            root.cambiarPista()
+        font_name: 'fonts/Race Sport.ttf'
+
+    Button:
+        id: quit_button
+        text: "Salir"
+        size: 150, 50
+        background_color: negro
+        color: blanco
+        on_press: 
+            root.salir()
+        font_name: 'fonts/Race Sport.ttf'
+
+    Label:
+        id: puntaje_label
+        color : negro
+        font_size: 24
+        text: "MEJOR PUNTAJE: "+str(root.player.mejor_score)
+        font_name: 'fonts/Race Sport.ttf'
+
