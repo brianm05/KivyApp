@@ -51,6 +51,7 @@ class Enemy(Widget):
     velocity_y = NumericProperty(0)
     velocity = ReferenceListProperty(velocity_x, velocity_y)
     color = ListProperty([1, 1, 1, 1])
+    imagen = StringProperty('assets/car1.png')
 
     def move(self):
         self.pos = Vector(*self.velocity) + self.pos
@@ -108,6 +109,9 @@ class Game(Widget):
         
         #obtener una lista con 3 numeros aleatorios (de 0 a 1) para el color rgb de auto enemigo
         self.car.color = [random.uniform(0,1)] +[random.uniform(0,1)] +[random.uniform(0,1)] + [1]
+        
+        #obtener modelo del auto enemigo
+        self.car.imagen=random.choice(["assets/car1.png","assets/car2.png"])
 
     def actualizarScore(self):
         self.player.score += 1 #aumentar el score actual
